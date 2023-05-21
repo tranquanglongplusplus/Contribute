@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/bootstrap.min.css}" />
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="login-form">
+        <th:block th:if="${#session != null && #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}">
+            <div th:if= "${#request.getParameter('error') == 'true'}">
+                <div class="alert alert-danger col-xs-offset-1 col-xs-10">
+                    Invalid username and password.
+                </div>
+            </div>
+        </th:block>
+        <form method="POST" th:action="@{/perform_login}">
+            <h2 class="text-center">Log in</h2>
+            <div class="form-group">
+                <input type="text" name="userName" class="form-control" placeholder="Username" required="required">
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" class="form-control" placeholder="Password" required="required">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Log in</button>
+            </div>
+            <div class="clearfix">
+                <a th:href="@{/}" class="pull-right">Come back</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
